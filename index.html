@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pràctica Login</title>
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <meta name="google-signin-client_id" content="674891882175-15ou1ebjqnkc392osgavlkhkk12voepj.apps.googleusercontent.com">
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+        }
+        
+        .g_id_signin {
+            display: inline-block;
+        }
+
+        #missatge-benvinguda {
+            color: #333;
+        }
+        
+        #boto-sortir {
+            font-size: 16px;
+            padding: 8px 16px;
+            cursor: pointer;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="g_id_onload"
+         data-client_id="674891882175-15ou1ebjqnkc392osgavlkhkk12voepj.apps.googleusercontent.com"
+         data-callback="onSignIn">
+    </div>
+
+    <div class="g_id_signin"
+         data-type="standard">
+    </div>
+
+    <h2 id="missatge-benvinguda" style="display:none;">Missatge de benvinguda</h2>
+
+    <button id="boto-sortir" style="display:none;" onclick="signOut()">
+        Desconnectar
+    </button>
+
+    <script>
+        function onSignIn(response) {
+            var id_token = response.credential;
+            console.log("ID Token: " + id_token);
+            
+            document.getElementById('boto-sortir').style.display = 'block';
+            document.getElementById('missatge-benvinguda').style.display = 'block';
+            document.querySelector('.g_id_signin').style.display = 'none';
+        }
+        
+        function signOut() {
+            document.getElementById('boto-sortir').style.display = 'none';
+            document.getElementById('missatge-benvinguda').style.display = 'none';
+            document.querySelector('.g_id_signin').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
