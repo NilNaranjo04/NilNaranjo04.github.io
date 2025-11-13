@@ -11,12 +11,26 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding-top: 100px;
+            padding-top: 80px;
         }
         
+        #missatge-pre-login {
+            margin-bottom: 30px;
+        }
+        #missatge-pre-login h1 {
+            color: #222;
+        }
+        #missatge-pre-login p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+   
         .g_id_signin {
             display: inline-block;
+            margin-bottom: 20px;
         }
+
 
         #missatge-benvinguda {
             color: #333;
@@ -29,11 +43,17 @@
             background-color: #f4f4f4;
             border: 1px solid #ccc;
             border-radius: 4px;
+            margin-top: 15px; 
         }
     </style>
 </head>
 <body>
     
+    <div id="missatge-pre-login">
+        <h1>Benvingut/da a la Pràctica</h1>
+        <p>Per provar la funcionalitat, si us plau, inicia la sessió amb Google.</p>
+    </div>
+
     <div id="g_id_onload"
          data-client_id="674891882175-15ou1ebjqnkc392osgavlkhkk12voepj.apps.googleusercontent.com"
          data-callback="onSignIn">
@@ -43,7 +63,7 @@
          data-type="standard">
     </div>
 
-    <h2 id="missatge-benvinguda" style="display:none;">Missatge de benvinguda</h2>
+    <h2 id="missatge-benvinguda" style="display:none;">Has iniciat la sessió correctament!</h2>
 
     <button id="boto-sortir" style="display:none;" onclick="signOut()">
         Desconnectar
@@ -54,14 +74,18 @@
             var id_token = response.credential;
             console.log("ID Token: " + id_token);
             
+            document.getElementById('missatge-pre-login').style.display = 'none';
+            document.querySelector('.g_id_signin').style.display = 'none';
+
             document.getElementById('boto-sortir').style.display = 'block';
             document.getElementById('missatge-benvinguda').style.display = 'block';
-            document.querySelector('.g_id_signin').style.display = 'none';
         }
         
         function signOut() {
             document.getElementById('boto-sortir').style.display = 'none';
             document.getElementById('missatge-benvinguda').style.display = 'none';
+
+            document.getElementById('missatge-pre-login').style.display = 'block';
             document.querySelector('.g_id_signin').style.display = 'block';
         }
     </script>
